@@ -12,10 +12,12 @@ Airdrop Claim Smart Contract for LOWB
 
   ```javascript
   truffle(development)> let instance = await AirdropClaim.deployed()
-  truffle(development)> let accounts = await web3.eth.getAccounts()
-  truffle(development)> instance.setupWhitelist(accounts, [10,20,30,40,50,60,70,80,90,100])
+  truffle(development)> instance.setClaimExpiredAt(1621310400)
+  truffle(development)> let whitelist = require('./whitelist.json')
+  truffle(development)> instance.setupWhitelist(whitelist.candidates, whitelist.values)
   ```
 ### Depolying to the live network
 
 - Create a new .secret file in root directory and enter your 12 word mnemonic seed phrase. Then just run `truffle migrate --network testnet`. You will deploy contracts to the Binance testnet. (You may need to install hdwallet-provider first: `npm install @truffle/hdwallet-provider@1.2.2`.)
-- To verify the contract, create a new .apikey file in root directory and enter the [API Key](https://bscscan.com/myapikey). Then just run `truffle run verify GameItem@{contract-address} --network testnet`. (You may need to install truffle-plugin-verify first: `npm install -D truffle-plugin-verify`.)
+- To verify the contract, create a new .apikey file in root directory and enter the [API Key](https://bscscan.com/myapikey). Then just run `truffle run verify AirdropClaim@{contract-address} --network testnet`. (You may need to install truffle-plugin-verify first: `npm install -D truffle-plugin-verify`.)
+
